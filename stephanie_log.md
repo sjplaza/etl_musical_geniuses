@@ -9,4 +9,6 @@
 * filtered tables to show only loudness & speechiness
 * calculated average speechiness
 
-## 2020-10.04
+### 2020-10.04
+* filtered tables & sent to sql
+* created csv files of updated sql tables
