@@ -12,3 +12,7 @@
 ### 2020-10.04
 * filtered tables & sent to sql
 * created csv files of updated sql tables
+
+### 2020-10.06
+* updated code to query correct data file
+* updated schemas and tables in sql
