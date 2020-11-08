@@ -1,8 +1,8 @@
 CREATE TABLE music_data
 (
-    acousticness INT,
+    acousticness DECIMAL,
     artists VARCHAR,
-    danceability VARCHAR,
+    danceability DECIMAL,
     duration_ms INT,
     energy DECIMAL,
     explicit INT,
@@ -12,9 +12,9 @@ CREATE TABLE music_data
     liveness DECIMAL,
     loudness DECIMAL,
     mode INT,
-    name INT,
+    name TEXT,
     popularity INT,
-    release_date DATE,
+    release_date VARCHAR,
     speechiness DECIMAL,
     tempo DECIMAL,
     valence DECIMAL,
