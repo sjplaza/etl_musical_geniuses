@@ -33,7 +33,7 @@ let chosenX = 'dancability';
 function xScale(MusicData, chosenX) {
     // create linear scale
     let xLinearScale = d3.scaleLinear()
-        .domain([d3.min(MusisData, d => d[chosenX]) * 0.7 ,d3.max(MusisData, d=> d[chosenX]) * 1.3])
+        .domain([d3.min(MusicData, d => d[chosenX]) * 0.7 ,d3.max(MusicData, d=> d[chosenX]) * 1.3])
         .range([0, width]);
     
     return xLinearScale;
@@ -86,7 +86,7 @@ function updateToolTip(chosenX, circlesGroup) {
     return circlesGroup
 }
 
-d3.csv('data.csv').then(function(MusicData) {
+d3.csv('./data_files/data.csv').then(function(MusicData) {
         console.log()
 
 
@@ -139,9 +139,9 @@ d3.csv('data.csv').then(function(MusicData) {
     let povertyLabel = labelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 30)
-        .attr("value", "poverty")
+        .attr("value", "speechiness")
         .classed("inactive", true)
-        .text("Poverty Level");
+        .text("Speechiness Level");
     
     // Set up y axis label
     chartGroup.append("text")
@@ -150,7 +150,7 @@ d3.csv('data.csv').then(function(MusicData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .classed("axis-text", true)
-        .text("Obesity");
+        .text("Year");
     
     // updateToolTip
     circlesGroup = updateToolTip(chosenX, circlesGroup)
@@ -163,25 +163,25 @@ d3.csv('data.csv').then(function(MusicData) {
 
                 console.log(chosenX);
 
-                xLinearScale = xScale(HealthData, chosenX);
+                xLinearScale = xScale(MusicData, chosenX);
                 xAxis = renderAxes(xLinearScale, xAxis);
                 circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenX);
                 circlesGroup = updateToolTip(chosenX, circlesGroup);
 
 
-                if (chosenX === "poverty") {
-                    povertyLabel
+                if (chosenX === "danceability") {
+                    danceabilityLabel
                         .classed("active", true)
                         .classed("inactive", false);
-                    incomeLabel
+                    speechinessLabel
                         .classed("active", false)
                         .classed("inactive", true);
                 }
                 else {
-                    povertyLabel
+                    danceabilityLabel
                         .classed("active", false)
                         .classed("inactive", true);
-                    incomeLabel
+                    speechinessLabel
                         .classed("active", true)
                         .classed("inactive", false);
                 }
