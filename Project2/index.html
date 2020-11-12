@@ -50,7 +50,7 @@
         function update(selectedVar) {
 
             // Parse the Data
-            d3.csv("filtered_data.csv", function (data) {
+            d3.csv("../data_files/filtered_data.csv", function (data) {
 
                 // X axis
                 x.domain(data.map(function (d) { return d.year; }))

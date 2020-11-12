@@ -1,5 +1,4 @@
 appdirs==1.4.4
-argon2-cffi @ file:///D:/bld/argon2-cffi_1596629999983/work
 attrs==19.3.0
 backports.functools-lru-cache==1.6.1
 beautifulsoup4==4.9.1
