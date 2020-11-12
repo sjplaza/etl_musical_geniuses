@@ -1,8 +1,7 @@
-.bubbles {
-  stroke-width: 1px;
-  stroke: black;
-  opacity: .8
+.bar {
+  fill: purple;
 }
-.bubbles:hover {
-  stroke: black;
+
+.bar:hover {
+  fill: orange;
 }

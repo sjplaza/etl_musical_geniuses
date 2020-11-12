@@ -1,34 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<meta charset="utf-8">
+<style>
+    /* set the CSS */
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Trends in Music</title>
-
-    <!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v4.js"></script>
-
-    <!-- Load color scale -->
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
-    <!-- Create a div where the graph will take place -->
-    <div id="my_dataviz"></div>
-
-    <link rel="stylesheet" href="style.css">
-
-</head>
+    .bar {
+        fill: steelblue;
+    }
+</style>
 
 <body>
 
-    <div id="chart"></div>
+    <div id="my_dataviz"></div>
+    <!-- load the d3.js library -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Add 2 buttons -->
+    <button onclick="update('danceability')">Dance</button>
+    <button onclick="update('energy')">Energy</button>
+    <button onclick="update('speechiness')">Speech</button>
+    <script>
 
-    </div>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-    <script type="text/javascript" src="app2.js"></script>
+        // set the dimensions and margins of the graph
+        var margin = { top: 30, right: 30, bottom: 70, left: 60 },
+            width = 600 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
 
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_dataviz")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+        // Initialize the X axis
+        var x = d3.scaleBand()
+            .range([0, width])
+            .padding(0.2);
+        var xAxis = svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+
+        // Initialize the Y axis
+        var y = d3.scaleLinear()
+            .range([height, 0]);
+        var yAxis = svg.append("g")
+            .attr("class", "myYaxis")
+
+
+        // A function that create / update the plot for a given variable:
+        function update(selectedVar) {
+
+            // Parse the Data
+            d3.csv("filtered_data.csv", function (data) {
+
+                // X axis
+                x.domain(data.map(function (d) { return d.year; }))
+                xAxis.transition().duration(1000).call(d3.axisBottom(x))
+                    .selectAll("text")
+                    .attr("transform", "translate(-10,0)rotate(-45)")
+                    .style("text-anchor", "end");
+
+                // Add Y axis
+                y.domain([0, d3.max(data, function (d) { return +d[selectedVar] })]);
+                yAxis.transition().duration(1000).call(d3.axisLeft(y));
+
+                // variable u: map data to existing bars
+                var u = svg.selectAll("rect")
+                    .data(data)
+
+                // update bars
+                u
+                    .enter()
+                    .append("rect")
+                    .merge(u)
+                    .transition()
+                    .duration(1000)
+                    .attr("x", function (d) { return x(d.year); })
+                    .attr("y", function (d) { return y(d[selectedVar]); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function (d) { return height - y(d[selectedVar]); })
+                    .attr("fill", "navy")
+            })
+
+        }
+
+        // Initialize plot
+        update('danceability')
+
+    </script>
 </body>
-
-</html>
