@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Music Throughout the Years</title>
+<style>
+    /* set the CSS */
+
+    .bar {
+        fill: steelblue;
+    }
+</style>
+
+<body>
+
+    <div id="my_dataviz"></div>
+
+    <!-- load the d3.js library -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Add buttons -->
+    <button onclick="update('danceability')">Dance</button>
+    <button onclick="update('energy')">Energy</button>
+    <button onclick="update('speechiness')">Speech</button>
+    <button onclick="update('duration_ms')">Duration (ms)</button>
+
+    <script type="text/javascript" src="bars.js"></script>
+
+    <figure>
+        <figcaption>Beethoven Symphony no. 8 in F major, Op. 93</figcaption>
+        <audio controls src="./project2/media/cut Symphony No. 8.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </figure>
+
+</body>
